@@ -3,17 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Chat App</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Mercy ❤️ Rahl</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: black;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.8;
+      transition: all 2s ease-in-out;
+    }
+
+    #finalText {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      font-weight: bold;
+      font-family: "Segoe UI", sans-serif;
+      color: white;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <div class="login-container">
-    <h2>Login</h2>
-    <input type="text" id="username" placeholder="Enter username">
-    <input type="password" id="password" placeholder="Enter password">
-    <button onclick="login()">Login</button>
-    <p id="error" class="error"></p>
-  </div>
-  <script src="app.js"></script>
+  <div id="container"></div>
+  <div id="finalText">Mercy ❤️ Rahl</div>
+
+  <script>
+    const container = document.getElementById("container");
+    const finalText = document.getElementById("finalText");
+
+    const emojiCount = 50;
+    const emojis = [];
+
+    // Create random scattered emojis
+    for (let i = 0; i < emojiCount; i++) {
+      const span = document.createElement("span");
+      span.innerText = "❤️";
+      span.classList.add("emoji");
+      span.style.top = Math.random() * window.innerHeight + "px";
+      span.style.left = Math.random() * window.innerWidth + "px";
+      container.appendChild(span);
+      emojis.push(span);
+    }
+
+    // After 2s, move emojis to center
+    setTimeout(() => {
+      emojis.forEach((span, i) => {
+        span.style.top = (window.innerHeight / 2 - 50) + (Math.sin(i) * 50) + "px";
+        span.style.left = (window.innerWidth / 2 - 100) + (i * 5) + "px";
+      });
+
+      // Show text after animation
+      setTimeout(() => {
+        finalText.style.display = "block";
+      }, 2000);
+    }, 2000);
+  </script>
 </body>
 </html>
